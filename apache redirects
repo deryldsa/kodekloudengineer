@@ -1,0 +1,21 @@
+you would need to create 2 Virtual Host entries in  <br />
+/etc/httpd/conf/httpd.conf <br />
+
+Listen 3002<br />
+`<VirtualHost *:3002>` <br />
+     ServerName stapp01.stratos.xfusioncorp.com <br />
+     Redirect 301 /  http://www.stapp01.stratos.xfusioncorp.com:3002 <br />
+`</VirtualHost>` <br />
+
+`<VirtualHost *:3002\>` <br />
+     ServerName www.stapp01.stratos.xfusioncorp.com <br />
+     Redirect 302 /blog/  http://www.stapp01.stratos.xfusioncorp.com:3002/news <br />
+`</VirtualHost>` <br />
+
+**Test using curl to make sure you get correct results.** <br />
+ 
+curl http://stapp01.stratos.xfusioncorp.com <br />
+**result would be  redirect to www.stapp01.stratos.xfusioncorp.com**  <br />
+curl http://stapp01.stratos.xfusioncorp.com/blog/ <br />
+**result would be  redirect to http://www.stapp01.stratos.xfusioncorp.com/news** 
+
